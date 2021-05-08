@@ -174,6 +174,24 @@ sales_by_year_tbl %>%
 ```{r plot, fig.width=10, fig.height=7}
 # 6.1 Sales by Year state ----
 
+Rev_per_state <- bike_orderlines_wrangled_tbl %>%
+ select(state, total_price) %>%
+    
+    group_by(state) %>%
+    summarize(revenue = sum(total_price)) %>%
+    ungroup()
+# Bar Plot
+Rev_per_state %>%
+    
+    mutate(state = state %>% as_factor() %>% fct_reorder(revenue)) %>%
+    
+    ggplot(aes(state, revenue)) +
+    
+    geom_col(fill = "#2c3e50") + 
+    coord_flip()
+
+
+
 # Step 1 - Manipulate
 sales_by_year_cat_1_tbl <- bike_orderlines_wrangled_tbl %>%
   
