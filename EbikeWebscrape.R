@@ -1,32 +1,3 @@
----
-title: "02 Data Acqusition"
-date: "2021-04"
-output:
-  html_document:
-    toc: true
-    toc_float: true
-    df_print: paged
-    collapsed: false
-    number_sections: true
-    toc_depth: 3
-    code_folding: hide
----
-# Current Price of different Cryptocurrencies
-based on the website "Coingecko"
-```{r}
-library(jsonlite)
-library(data.table)
-
-response = fromJSON("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Ccardano%2Cdogecoin%2Cstellar&vs_currencies=EUR&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true")
-
-Coins <- as.data.frame(response)
-Coins
-
-
-```
-# Table Collection of the Prizes of E-Bikes
-based on the Website "Rosebikes"
-```{r}
 # WEBSCRAPING ----
 
 # 1.0 LIBRARIES ----
@@ -65,4 +36,3 @@ bike_ebike_prizes_tbl <- left_join(bike_names_tbl, bike_prizes_tbl, by = "Positi
 
 bike_ebike_prizes_tbl
   
-```

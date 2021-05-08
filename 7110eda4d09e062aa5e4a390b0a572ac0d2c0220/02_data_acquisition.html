@@ -380,34 +380,90 @@ div.tocify {
 </div>
 
 
-<p><strong>IMPORTANT:</strong> You can delete everything in here and start fresh. You might want to start by not deleting anything above this line until you know what that stuff is doing.</p>
-<p>This is an <code>.Rmd</code> file. It is plain text with special features. Any time you write just like this, it will be compiled to normal text in the website. If you put a # in front of your text, it will create a top level-header.</p>
-<div id="my-first-post" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> My first post</h1>
-<p>Last compiled: 2021-05-05</p>
-<p>Notice that whatever you define as a top level header, automatically gets put into the table of contents bar on the left.</p>
-<div id="second-level-header" class="section level2" number="1.1">
-<h2 number="1.1"><span class="header-section-number">1.1</span> Second level header</h2>
-<p>You can add more headers by adding more hashtags. These won’t be put into the table of contents</p>
-<div id="third-level-header" class="section level3" number="1.1.1">
-<h3 number="1.1.1"><span class="header-section-number">1.1.1</span> third level header</h3>
-<p>Here’s an even lower level header</p>
+<div id="current-price-of-different-cryptocurrencies" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Current Price of different Cryptocurrencies</h1>
+<p>based on the website “Coingecko”</p>
+<pre class="r"><code>library(jsonlite)
+library(data.table)
+
+response = fromJSON(&quot;https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Ccardano%2Cdogecoin%2Cstellar&amp;vs_currencies=EUR&amp;include_market_cap=true&amp;include_24hr_vol=true&amp;include_24hr_change=true&amp;include_last_updated_at=true&quot;)
+
+Coins &lt;- as.data.frame(response)
+Coins</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["bitcoin.eur"],"name":[1],"type":["int"],"align":["right"]},{"label":["bitcoin.eur_market_cap"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["bitcoin.eur_24h_vol"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["bitcoin.eur_24h_change"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["bitcoin.last_updated_at"],"name":[5],"type":["int"],"align":["right"]},{"label":["dogecoin.eur"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["dogecoin.eur_market_cap"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["dogecoin.eur_24h_vol"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["dogecoin.eur_24h_change"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["dogecoin.last_updated_at"],"name":[10],"type":["int"],"align":["right"]},{"label":["stellar.eur"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["stellar.eur_market_cap"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["stellar.eur_24h_vol"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["stellar.eur_24h_change"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["stellar.last_updated_at"],"name":[15],"type":["int"],"align":["right"]},{"label":["ethereum.eur"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["ethereum.eur_market_cap"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["ethereum.eur_24h_vol"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["ethereum.eur_24h_change"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["ethereum.last_updated_at"],"name":[20],"type":["int"],"align":["right"]},{"label":["cardano.eur"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["cardano.eur_market_cap"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["cardano.eur_24h_vol"],"name":[23],"type":["dbl"],"align":["right"]},{"label":["cardano.eur_24h_change"],"name":[24],"type":["dbl"],"align":["right"]},{"label":["cardano.last_updated_at"],"name":[25],"type":["int"],"align":["right"]}],"data":[{"1":"48156","2":"900195850805","3":"55303287004","4":"2.953071","5":"1620471924","6":"0.583621","7":"75877846942","8":"22553193778","9":"14.00348","10":"1620471956","11":"0.520777","12":"11923287074","13":"1934068055","14":"-3.5015","15":"1620471997","16":"2911.22","17":"337143646983","18":"35599136013","19":"1.746331","20":"1620471922","21":"1.33","22":"42539729872","23":"4967501002","24":"-2.489721","25":"1620472012"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
 </div>
 </div>
+<div id="table-collection-of-the-prizes-of-e-bikes" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Table Collection of the Prizes of E-Bikes</h1>
+<p>based on the Website “Rosebikes”</p>
+<pre class="r"><code># WEBSCRAPING ----
+
+# 1.0 LIBRARIES ----
+
+library(tidyverse) # Main Package - Loads dplyr, purrr, etc.</code></pre>
+<pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --</code></pre>
+<pre><code>## v ggplot2 3.3.3     v purrr   0.3.4
+## v tibble  3.1.1     v dplyr   1.0.5
+## v tidyr   1.1.3     v stringr 1.4.0
+## v readr   1.4.0     v forcats 0.5.1</code></pre>
+<pre><code>## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::between()   masks data.table::between()
+## x dplyr::filter()    masks stats::filter()
+## x dplyr::first()     masks data.table::first()
+## x purrr::flatten()   masks jsonlite::flatten()
+## x dplyr::lag()       masks stats::lag()
+## x dplyr::last()      masks data.table::last()
+## x purrr::transpose() masks data.table::transpose()</code></pre>
+<pre class="r"><code>library(rvest)     # HTML Hacking &amp; Web Scraping</code></pre>
+<pre><code>## 
+## Attaching package: &#39;rvest&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:readr&#39;:
+## 
+##     guess_encoding</code></pre>
+<pre class="r"><code>library(xopen)     # Quickly opening URLs
+library(jsonlite)  # converts JSON files to R objects
+library(glue)      # concatenate strings</code></pre>
+<pre><code>## 
+## Attaching package: &#39;glue&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     collapse</code></pre>
+<pre class="r"><code>library(stringi)   # character string/text processing
+
+url_home          &lt;- &quot;https://www.rosebikes.de/fahrr%C3%A4der/e-bike&quot;
+html_home         &lt;- read_html(url_home)
+
+bike_names_tbl &lt;- html_home %&gt;%
+  html_elements(css = &quot;.catalog-category-bikes__price-title , .catalog-category-bikes__title-text&quot;) %&gt;%
+  html_text(trim=TRUE) %&gt;%
+  discard(.p = ~stringr::str_detect(.x,&quot;ab|\200&quot;)) %&gt;%
+  enframe(name = &quot;Position&quot;, value = &quot;Name&quot;) %&gt;%
+  #matrix(ncol = 2)%&gt;%
+  as.data.frame(stringsAsFactors=FALSE) 
+
+bike_prizes_tbl &lt;- html_home %&gt;%
+  html_elements(css = &quot;.catalog-category-bikes__price-title , .catalog-category-bikes__title-text&quot;) %&gt;%
+  html_text(trim=TRUE) %&gt;%
+  discard(.p = ~stringr::str_detect(.x,&quot;ab|\200&quot;, negate=TRUE)) %&gt;%
+  str_replace(&quot;ab&quot;,&quot;&quot;) %&gt;%
+  str_replace(&quot;\200&quot;,&quot;&quot;) %&gt;%
+  #str_extract(&quot;[0-9]+&quot;)%&gt;%
+  enframe(name=&quot;Position&quot;, value=&quot;Price&quot;) %&gt;%
+  mutate(price_num = Price %&gt;% readr::parse_number()) %&gt;%
+  as.data.frame() 
+
+  
+bike_ebike_prizes_tbl &lt;- left_join(bike_names_tbl, bike_prizes_tbl, by = &quot;Position&quot;)
+
+bike_ebike_prizes_tbl</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Position"],"name":[1],"type":["int"],"align":["right"]},{"label":["Name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Price"],"name":[3],"type":["chr"],"align":["left"]},{"label":["price_num"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"XTRA WATT EVO ALLROAD HERREN","3":"4.699,00","4":"4.699"},{"1":"2","2":"XTRA WATT EVO ALLROAD DAMEN","3":"4.699,00","4":"4.699"},{"1":"3","2":"XTRA WATT EVO ALLROAD UNISEX","3":"4.699,00","4":"4.699"},{"1":"4","2":"XTRA WATT EVO HERREN","3":"2.999,00","4":"2.999"},{"1":"5","2":"XTRA WATT EVO DAMEN","3":"2.999,00","4":"2.999"},{"1":"6","2":"XTRA WATT EVO UNISEX","3":"4.099,00","4":"4.099"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
 </div>
-<div id="my-second-post-note-the-order" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> My second post (note the order)</h1>
-<p>Last compiled: 2021-05-05</p>
-<p>I’m writing this tutorial going from the top down. And, this is how it will be printed. So, notice the second post is second in the list. If you want your most recent post to be at the top, then make a new post starting at the top. If you want the oldest first, do, then keep adding to the bottom</p>
-</div>
-<div id="adding-r-stuff" class="section level1" number="3">
-<h1 number="3"><span class="header-section-number">3</span> Adding R stuff</h1>
-<p>So far this is just a blog where you can write in plain text and serve your writing to a webpage. One of the main purposes of this lab journal is to record your progress learning R. The reason I am asking you to use this process is because you can both make a website, and a lab journal, and learn R all in R-studio. This makes everything really convenient and in the same place.</p>
-<p>So, let’s say you are learning how to make a histogram in R. For example, maybe you want to sample 100 numbers from a normal distribution with mean = 0, and standard deviation = 1, and then you want to plot a histogram. You can do this right here by using an r code block, like this:</p>
-<pre class="r"><code>samples &lt;- rnorm(100, mean=0, sd=1)
-hist(samples)</code></pre>
-<p><img src="02_data_acquisition_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<p>When you knit this R Markdown document, you will see that the histogram is printed to the page, along with the R code. This document can be set up to hide the R code in the webpage, just delete the comment (hashtag) from the cold folding option in the yaml header up top. For purposes of letting yourself see the code, and me see the code, best to keep it the way that it is. You’ll learn that all of these things and more can be customized in each R code block.</p>
 </div>
 
 
