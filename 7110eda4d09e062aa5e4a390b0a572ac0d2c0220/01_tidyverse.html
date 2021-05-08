@@ -575,7 +575,23 @@ sales_by_year_tbl %&gt;%
 <h2 number="1.2"><span class="header-section-number">1.2</span> Sales by State &amp; Year</h2>
 <pre class="r"><code># 6.1 Sales by Year state ----
 
-# Step 1 - Manipulate
+Rev_per_state &lt;- bike_orderlines_wrangled_tbl %&gt;%
+ select(state, total_price) %&gt;%
+    
+    group_by(state) %&gt;%
+    summarize(revenue = sum(total_price)) %&gt;%
+    ungroup()
+# Bar Plot
+Rev_per_state %&gt;%
+    
+    mutate(state = state %&gt;% as_factor() %&gt;% fct_reorder(revenue)) %&gt;%
+    
+    ggplot(aes(state, revenue)) +
+    
+    geom_col(fill = &quot;#2c3e50&quot;) + 
+    coord_flip()</code></pre>
+<p><img src="01_tidyverse_files/figure-html/plot-1.png" width="960" /></p>
+<pre class="r"><code># Step 1 - Manipulate
 sales_by_year_cat_1_tbl &lt;- bike_orderlines_wrangled_tbl %&gt;%
   
   # Select columns and add a year
@@ -625,7 +641,7 @@ sales_by_year_cat_1_tbl %&gt;%
     subtitle = &quot;By year and state&quot;,
     fill = &quot;Main category&quot; # Changes the legend name
   )</code></pre>
-<p><img src="01_tidyverse_files/figure-html/plot-1.png" width="960" /></p>
+<p><img src="01_tidyverse_files/figure-html/plot-2.png" width="960" /></p>
 </div>
 </div>
 
