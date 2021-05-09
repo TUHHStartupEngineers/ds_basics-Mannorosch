@@ -380,9 +380,11 @@ div.tocify {
 </div>
 
 
-<div id="current-price-of-different-cryptocurrencies" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Current Price of different Cryptocurrencies</h1>
-<p>based on the website “Coingecko”</p>
+<div id="data-of-different-cryptocurrencies" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Data of different Cryptocurrencies</h1>
+<div id="current-price-market-cap-and-24h-trading-volume" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Current Price, Market Cap and 24h trading Volume</h2>
+<p>Data based on the website “Coingecko”</p>
 <pre class="r"><code>library(jsonlite)
 library(data.table)
 
@@ -392,8 +394,9 @@ Coins &lt;- as.data.frame(response)
 Coins</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["cardano.eur"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["cardano.eur_market_cap"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["cardano.eur_24h_vol"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["stellar.eur"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["stellar.eur_market_cap"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["stellar.eur_24h_vol"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["bitcoin.eur"],"name":[7],"type":["int"],"align":["right"]},{"label":["bitcoin.eur_market_cap"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["bitcoin.eur_24h_vol"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["ethereum.eur"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["ethereum.eur_market_cap"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["ethereum.eur_24h_vol"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["dogecoin.eur"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["dogecoin.eur_market_cap"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["dogecoin.eur_24h_vol"],"name":[15],"type":["dbl"],"align":["right"]}],"data":[{"1":"1.32","2":"42584801065","3":"3990306078","4":"0.50738","5":"11700991846","6":"1375447580","7":"48919","8":"912357461674","9":"57186549143","10":"3175.23","11":"367688291019","12":"46017389847","13":"0.559832","14":"72507891246","15":"26860555394"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["dogecoin.eur"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["dogecoin.eur_market_cap"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["dogecoin.eur_24h_vol"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["ethereum.eur"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["ethereum.eur_market_cap"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["ethereum.eur_24h_vol"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["cardano.eur"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["cardano.eur_market_cap"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["cardano.eur_24h_vol"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["bitcoin.eur"],"name":[10],"type":["int"],"align":["right"]},{"label":["bitcoin.eur_market_cap"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["bitcoin.eur_24h_vol"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["stellar.eur"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["stellar.eur_market_cap"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["stellar.eur_24h_vol"],"name":[15],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.439059","2":"56852308147","3":"36563647898","4":"3225.03","5":"374197884692","6":"53335880280","7":"1.48","8":"47381435648","9":"6294173522","10":"47188","11":"883390857474","12":"56630985748","13":"0.513753","14":"11841400497","15":"1416043049"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
+</div>
 </div>
 </div>
 <div id="table-collection-of-the-prizes-of-e-bikes" class="section level1" number="2">

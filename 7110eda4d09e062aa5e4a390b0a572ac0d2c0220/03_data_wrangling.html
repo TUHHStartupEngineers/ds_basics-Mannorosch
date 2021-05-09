@@ -537,7 +537,7 @@ combined_data_c2 &lt;- merge(x = combined_data_c1, y = patent_data,
                           all.x = TRUE, 
                           all.y = FALSE)
 toc()</code></pre>
-<pre><code>## 1.63 sec elapsed</code></pre>
+<pre><code>## 0.76 sec elapsed</code></pre>
 <pre class="r"><code>combined_data_c2 %&gt;% glimpse()</code></pre>
 <pre><code>## Rows: 315,911
 ## Columns: 6
@@ -572,7 +572,7 @@ combined_data_c1[!is.na(organization), .N, by = organization]</code></pre>
   </script>
 </div>
 <pre class="r"><code>toc()</code></pre>
-<pre><code>## 0.26 sec elapsed</code></pre>
+<pre><code>## 0.31 sec elapsed</code></pre>
 <div id="how-many-patents-per-organization" class="section level1" number="1">
 <h1 number="1"><span class="header-section-number">1</span> How many Patents per organization</h1>
 <pre class="r"><code>tic()
@@ -587,7 +587,11 @@ combined_data_c1 %&gt;%
   </script>
 </div>
 <pre class="r"><code>toc()</code></pre>
-<pre><code>## 1.31 sec elapsed</code></pre>
+<pre><code>## 1.27 sec elapsed</code></pre>
+</div>
+<div id="challenge-2-3" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Challenge 2 &amp; 3</h1>
+<p>I wasn’t able to finish the following challenges. My code to filter the data by August 2014 did not work properly. Unfortunately I also wasn’t able to log into Mattermost to post my questions regarding my code prior to the weekend. I moved into a different appartment last weekend and my Internet was not working properly until thursday. So I’m really hoping that the scope of presented solutions for the tasks are sufficient to pass the course.</p>
 </div>
 
 

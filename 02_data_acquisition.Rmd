@@ -11,8 +11,9 @@ output:
     toc_depth: 3
     code_folding: hide
 ---
-# Current Price of different Cryptocurrencies
-based on the website "Coingecko"
+# Data of different Cryptocurrencies
+## Current Price, Market Cap and 24h trading Volume
+Data based on the website "Coingecko"
 ```{r}
 library(jsonlite)
 library(data.table)

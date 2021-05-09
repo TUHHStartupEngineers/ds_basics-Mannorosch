@@ -173,3 +173,7 @@ combined_data_c1 %>%
 toc()
 
 ```
+
+# Challenge 2 & 3
+
+I wasn't able to finish the following challenges. My code to filter the data by August 2014 did not work properly. Unfortunately I also wasn't able to log into Mattermost to post my questions regarding my code prior to the weekend. I moved into a different appartment last weekend and my Internet was not working properly until thursday. So I'm really hoping that the scope of presented solutions for the tasks are sufficient to pass the course. 

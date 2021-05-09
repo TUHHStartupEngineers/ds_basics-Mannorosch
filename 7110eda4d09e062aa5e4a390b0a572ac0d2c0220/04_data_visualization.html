@@ -380,12 +380,28 @@ div.tocify {
 </div>
 
 
+<div id="challenge-1" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Challenge #1</h1>
+<div id="cummulative-confirmed-covid-cases-worldwide" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Cummulative Confirmed Covid Cases Worldwide</h2>
 <pre class="r"><code>library(tidyverse) # Main Package - Loads dplyr, purrr, etc.
 library(rvest)     # HTML Hacking &amp; Web Scraping
 library(xopen)     # Quickly opening URLs
 library(jsonlite)  # converts JSON files to R objects
 library(glue)      # concatenate strings
 library(stringi)   # character string/text processing
+library(lubridate)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;lubridate&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:data.table&#39;:
+## 
+##     hour, isoweek, mday, minute, month, quarter, second, wday, week,
+##     yday, year</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     date, intersect, setdiff, union</code></pre>
+<pre class="r"><code>library(tictoc)
+
 
 covid_data_tbl &lt;- read_csv(&quot;https://covid.ourworldindata.org/data/owid-covid-data.csv&quot;)</code></pre>
 <pre><code>## 
@@ -407,13 +423,13 @@ covid_data_tbl &lt;- read_csv(&quot;https://covid.ourworldindata.org/data/owid-c
 ##   tests_units = col_character()
 ## )
 ## i Use `spec()` for the full column specifications.</code></pre>
-<pre><code>## Warning: 44036 parsing failures.
+<pre><code>## Warning: 44094 parsing failures.
 ##  row                       col           expected actual                                                        file
-## 5053 icu_patients              1/0/T/F/TRUE/FALSE 215.0  &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
-## 5053 icu_patients_per_million  1/0/T/F/TRUE/FALSE 23.872 &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
-## 5053 hosp_patients             1/0/T/F/TRUE/FALSE 856.0  &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
-## 5053 hosp_patients_per_million 1/0/T/F/TRUE/FALSE 95.044 &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
-## 5054 icu_patients              1/0/T/F/TRUE/FALSE 219.0  &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
+## 5065 icu_patients              1/0/T/F/TRUE/FALSE 215.0  &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
+## 5065 icu_patients_per_million  1/0/T/F/TRUE/FALSE 23.872 &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
+## 5065 hosp_patients             1/0/T/F/TRUE/FALSE 856.0  &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
+## 5065 hosp_patients_per_million 1/0/T/F/TRUE/FALSE 95.044 &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
+## 5066 icu_patients              1/0/T/F/TRUE/FALSE 219.0  &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
 ## .... ......................... .................. ...... ...........................................................
 ## See problems(...) for more details.</code></pre>
 <pre class="r"><code>covid_data_world_tbl  &lt;- covid_data_tbl%&gt;%
@@ -422,8 +438,41 @@ covid_data_tbl &lt;- read_csv(&quot;https://covid.ourworldindata.org/data/owid-c
 covid_cases_world_tbl&lt;- covid_data_world_tbl%&gt;%
   select(date,total_cases)
 
-plot(covid_cases_world_tbl)</code></pre>
+covid_cases_world_tbl %&gt;%
+  ggplot(aes(x = date, y = total_cases, color = total_cases))+
+  geom_line(size=2)+
+  labs(
+    title = &quot;Covid Cases Worldwide&quot;,
+    subtitle = &quot;Confirmed Covid Cases based on the Data found here: https://covid.ourworldindata.org/&quot;,
+    x = &quot;Date&quot;,
+    y = &quot;Covid Cases&quot;,
+    caption = &quot;Cummulative confirmed Covid-Cases since the outbreak in Wuhan in late 2020&quot;
+  )</code></pre>
 <p><img src="04_data_visualization_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+</div>
+<div id="challenge-2" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Challenge #2</h1>
+<p>unfortunately I wasn’t able to finish this exercise. My approach was to set up a Dataframe for each continent with the corresponding mortality rates and the locations (defined by either country or longitude/latitude). That worked out as planned to this point. The problem I had was to cummulate the mortality rate over time per country and to plot this onto the given map. To show you the code up the point that worked out, I’ve put it below as plain text.</p>
+<div id="code-for-challenge-2" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Code for challenge #2</h2>
+<p>covid_data_tbl &lt;- read_csv(“<a href="https://covid.ourworldindata.org/data/owid-covid-data.csv" class="uri">https://covid.ourworldindata.org/data/owid-covid-data.csv</a>”)</p>
+<p>covid_data_world_tbl &lt;- covid_data_tbl%&gt;% filter(iso_code== ‘OWID_WRL’)</p>
+<p>covid_cases_world_tbl&lt;- covid_data_world_tbl%&gt;% select(date,total_cases)%&gt;% mutate(date = ymd(date, label=TRUE))</p>
+<p>#Mortality Rate Asia</p>
+<p>covid_data_asia_tbl &lt;- covid_data_tbl%&gt;% filter(continent== ‘Asia’) covid_mort_asia_tbl&lt;- covid_data_asia_tbl%&gt;% select(date,total_deaths,total_cases,location)%&gt;% mutate(mortality=total_deaths/total_cases)%&gt;% select(date, mortality, location)</p>
+<p>covid_data_SA_tbl &lt;- covid_data_tbl%&gt;% filter(continent== ‘South America’) covid_mort_SA_tbl&lt;- covid_data_SA_tbl%&gt;% select(date,total_deaths,total_cases,location)%&gt;% mutate(mortality=total_deaths/total_cases)%&gt;% select(date, mortality, location)</p>
+<p>covid_data_NA_tbl &lt;- covid_data_tbl%&gt;% filter(continent== ‘North America’) covid_mort_NA_tbl&lt;- covid_data_NA_tbl%&gt;% select(date,total_deaths,total_cases,location)%&gt;% mutate(mortality=total_deaths/total_cases)%&gt;% select(date, mortality, location)</p>
+<p>covid_data_Africa_tbl &lt;- covid_data_tbl%&gt;% filter(continent== ‘Africa’) covid_mort_Africa_tbl&lt;- covid_data_Africa_tbl%&gt;% select(date,total_deaths,total_cases,location)%&gt;% mutate(mortality=total_deaths/total_cases)%&gt;% select(date, mortality, location)</p>
+<p>covid_data_europe_tbl &lt;-covid_data_tbl%&gt;% filter(continent== ‘Europe’) covid_mort_Europe_tbl &lt;- covid_data_europe_tbl%&gt;% select(date,total_deaths,total_cases,location)%&gt;% mutate(mortality=total_deaths/total_cases)%&gt;% select(date, mortality, location)</p>
+<p>world &lt;- map_data(“world”)%&gt;% rename( location = region)</p>
+<p>combined_data_asia &lt;- merge(x = covid_mort_asia_tbl, y = world, by = “location”, all.x = TRUE, all.y = FALSE)</p>
+<p>combined_data_SA &lt;- merge(x = covid_mort_SA_tbl, y = world, by = “location”, all.x = TRUE, all.y = FALSE)</p>
+<p>combined_data_NA &lt;- merge(x = covid_mort_NA_tbl, y = world, by = “location”, all.x = TRUE, all.y = FALSE)</p>
+<p>combined_data_Africa &lt;- merge(x = covid_mort_Africa_tbl, y = world, by = “location”, all.x = TRUE, all.y = FALSE)</p>
+<p>combined_data_Europe &lt;- merge(x = covid_mort_Europe_tbl, y = world, by = “location”, all.x = TRUE, all.y = FALSE)</p>
+</div>
+</div>
 
 
 
