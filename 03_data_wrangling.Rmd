@@ -12,6 +12,7 @@ output:
     code_folding: hide
 ---
 ```{r}
+knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 # 1.0 Libraries
 # Tidyverse
 library(tidyverse)
@@ -174,6 +175,44 @@ toc()
 
 ```
 
-# Challenge 2 & 3
+# How many Patents per organization in August 2014
+```{r}
 
-I wasn't able to finish the following challenges. My code to filter the data by August 2014 did not work properly. Unfortunately I also wasn't able to log into Mattermost to post my questions regarding my code prior to the weekend. I moved into a different appartment last weekend and my Internet was not working properly until thursday. So I'm really hoping that the scope of presented solutions for the tasks are sufficient to pass the course. 
+# 5.2 How many Patents per organization in August 2014 ----
+
+tic()
+combined_data_c2 %>%
+  filter(!is.na(date), lubridate::month(date) == 08) %>%
+  count(organization) %>%
+  arrange(desc(n)) %>%
+  slice_head(n=10)
+toc()
+
+```
+
+# Innovation in Technology
+## Table Data
+```{r}
+
+# 5.3 Inno in Tech ----
+tic()
+combined_data_c3 %>%
+  filter(!is.na(mainclass_id)) %>%
+  count(mainclass_id) %>%
+  arrange(desc(n)) %>%
+  slice_head(n=10)
+toc()
+```
+## The top 5 Tech Sectors are: 
+
+"Active solid-state devices" with 41500 patents  
+
+"Telecommunications" with 29419 patents  
+
+"Multiplex Communications" with 25628 patents  
+
+"Semiconductor devices" with 20372 patents  
+
+"Electrical computers" with 18345 patents  
+
+

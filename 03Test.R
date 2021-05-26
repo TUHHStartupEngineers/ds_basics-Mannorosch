@@ -246,6 +246,8 @@ toc()
 
 # 5.3 Get last unpaid balance value for delinquent loans ----
 # data.table
+
+
 tic()
 combined_data[current_loan_delinquency_status >= 1, .SD[.N], by = loan_id][
   !is.na(current_upb)][

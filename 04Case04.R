@@ -28,9 +28,95 @@ covid_cases_world_tbl %>%
   )
 
 
+library(tidyverse) # Main Package - Loads dplyr, purrr, etc.
+library(rvest)     # HTML Hacking & Web Scraping
+library(xopen)     # Quickly opening URLs
+library(jsonlite)  # converts JSON files to R objects
+library(glue)      # concatenate strings
+library(stringi)   # character string/text processing
+library(ggplot2)
+library(maps)
+library(mapdata)
+
+covid_data_tbl <- read_csv("https://covid.ourworldindata.org/data/owid-covid-data.csv")
+
+#Mortality Rate
+
+covid_data_selection  <- covid_data_tbl%>%
+  select(location,total_cases,total_deaths)%>%
+  rename(region=location)%>%
+  group_by(region)
+
+covid_mort_data  <- covid_data_selection%>%
+  
+  summarise(mortality=max(total_deaths, na.rm = TRUE) / max(total_cases, na.rm = TRUE))
+
+world_map <- map_data("world")
+mutate(region==case_when(
+  region == "United Kingdom" ~ "UK",
+  region == "United States" ~ "USA",
+  region == "Democratic Republic of Congo" ~ "Democratic Republic of the Congo",
+  TRUE ~ location  )) 
 
 
+#Merging Data
+covid_mort_map <- merge(covid_mort_data, world_map, by = 'region')
 
+#Map
+ggplot(covid_mort_map, aes(x = long, y = lat, 
+                           group = group, 
+                           fill=mortality)) +
+  geom_polygon(color='gray') +
+  scale_fill_gradient2(low='white', high='red') +
+  theme_void () +
+  ggtitle('Covid Mortality Rates')
+  +geom_map(aes(map_id =region,group=group),
+            map = world_tbl,
+            color = "grey80",
+            fill = "grey30",
+            size = 0.3)
+
+
+#world_map <- map_data("world")
+#sort(unique(ggplot2::map_data("state")$region))
+#ggplot(world_map, aes(x = long, y = lat, group = group, fill=mortality)) +
+#  geom_polygon(fill="lightgray", colour = "white")
+
+library(tidyverse) # Main Package - Loads dplyr, purrr, etc.
+library(rvest)     # HTML Hacking & Web Scraping
+library(xopen)     # Quickly opening URLs
+library(jsonlite)  # converts JSON files to R objects
+library(glue)      # concatenate strings
+library(stringi)   # character string/text processing
+library(ggplot2)
+library(maps)
+library(mapdata)
+
+covid_data_tbl <- read_csv("https://covid.ourworldindata.org/data/owid-covid-data.csv")
+
+#Mortality Rate
+
+covid_data_selection  <- covid_data_tbl%>%
+  select(location,total_cases,total_deaths)%>%
+  rename(region=location)%>%
+  group_by(region)
+
+covid_mort_data  <- covid_data_selection%>%
+  
+  summarise(mortality=max(total_deaths, na.rm = TRUE) / max(total_cases, na.rm = TRUE))
+
+world_map <- map_data("world")
+
+
+#Merging Data
+covid_mort_map <- merge(covid_mort_data, world_map, by = 'region')
+
+#Map
+
+ggplot(covid_mort_map, aes(map_id = region)) +
+  geom_map(aes(fill = mortality), map = world_map) +
+  expand_limits(x = world_map$long, y = world_map$lat) +
+  scale_fill_gradient2(low='white', high='red')
 
 
 

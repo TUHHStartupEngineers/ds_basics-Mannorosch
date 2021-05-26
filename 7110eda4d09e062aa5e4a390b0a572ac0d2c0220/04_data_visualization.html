@@ -29,15 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -222,73 +216,7 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
-
-
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
 
 
 
@@ -298,16 +226,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-sm-12 col-md-4 col-lg-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -364,14 +282,6 @@ div.tocify {
 
 <div id="header">
 
-<div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-</ul>
-</div>
-
 
 
 <h1 class="title toc-ignore">04 Data Visualization</h1>
@@ -380,28 +290,12 @@ div.tocify {
 </div>
 
 
-<div id="challenge-1" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Challenge #1</h1>
-<div id="cummulative-confirmed-covid-cases-worldwide" class="section level2" number="1.1">
-<h2 number="1.1"><span class="header-section-number">1.1</span> Cummulative Confirmed Covid Cases Worldwide</h2>
-<pre class="r"><code>library(tidyverse) # Main Package - Loads dplyr, purrr, etc.
-library(rvest)     # HTML Hacking &amp; Web Scraping
-library(xopen)     # Quickly opening URLs
-library(jsonlite)  # converts JSON files to R objects
-library(glue)      # concatenate strings
-library(stringi)   # character string/text processing
-library(lubridate)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;lubridate&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:data.table&#39;:
-## 
-##     hour, isoweek, mday, minute, month, quarter, second, wday, week,
-##     yday, year</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     date, intersect, setdiff, union</code></pre>
-<pre class="r"><code>library(tictoc)
-
+<p>install.</p>
+<div id="challenge-1" class="section level1">
+<h1>Challenge #1</h1>
+<div id="cummulative-confirmed-covid-cases-worldwide" class="section level2">
+<h2>Cummulative Confirmed Covid Cases Worldwide</h2>
+<pre class="r"><code>knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 
 covid_data_tbl &lt;- read_csv(&quot;https://covid.ourworldindata.org/data/owid-covid-data.csv&quot;)</code></pre>
 <pre><code>## 
@@ -423,13 +317,13 @@ covid_data_tbl &lt;- read_csv(&quot;https://covid.ourworldindata.org/data/owid-c
 ##   tests_units = col_character()
 ## )
 ## i Use `spec()` for the full column specifications.</code></pre>
-<pre><code>## Warning: 44094 parsing failures.
+<pre><code>## Warning: 45734 parsing failures.
 ##  row                       col           expected actual                                                        file
-## 5065 icu_patients              1/0/T/F/TRUE/FALSE 215.0  &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
-## 5065 icu_patients_per_million  1/0/T/F/TRUE/FALSE 23.872 &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
-## 5065 hosp_patients             1/0/T/F/TRUE/FALSE 856.0  &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
-## 5065 hosp_patients_per_million 1/0/T/F/TRUE/FALSE 95.044 &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
-## 5066 icu_patients              1/0/T/F/TRUE/FALSE 219.0  &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
+## 5294 icu_patients              1/0/T/F/TRUE/FALSE 215.0  &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
+## 5294 icu_patients_per_million  1/0/T/F/TRUE/FALSE 23.872 &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
+## 5294 hosp_patients             1/0/T/F/TRUE/FALSE 856.0  &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
+## 5294 hosp_patients_per_million 1/0/T/F/TRUE/FALSE 95.044 &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
+## 5295 icu_patients              1/0/T/F/TRUE/FALSE 219.0  &#39;https://covid.ourworldindata.org/data/owid-covid-data.csv&#39;
 ## .... ......................... .................. ...... ...........................................................
 ## See problems(...) for more details.</code></pre>
 <pre class="r"><code>covid_data_world_tbl  &lt;- covid_data_tbl%&gt;%
@@ -451,33 +345,57 @@ covid_cases_world_tbl %&gt;%
 <p><img src="04_data_visualization_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 </div>
 </div>
-<div id="challenge-2" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> Challenge #2</h1>
-<p>unfortunately I wasn’t able to finish this exercise. My approach was to set up a Dataframe for each continent with the corresponding mortality rates and the locations (defined by either country or longitude/latitude). That worked out as planned to this point. The problem I had was to cummulate the mortality rate over time per country and to plot this onto the given map. To show you the code up the point that worked out, I’ve put it below as plain text.</p>
-<div id="code-for-challenge-2" class="section level2" number="2.1">
-<h2 number="2.1"><span class="header-section-number">2.1</span> Code for challenge #2</h2>
-<p>covid_data_tbl &lt;- read_csv(“<a href="https://covid.ourworldindata.org/data/owid-covid-data.csv" class="uri">https://covid.ourworldindata.org/data/owid-covid-data.csv</a>”)</p>
-<p>covid_data_world_tbl &lt;- covid_data_tbl%&gt;% filter(iso_code== ‘OWID_WRL’)</p>
-<p>covid_cases_world_tbl&lt;- covid_data_world_tbl%&gt;% select(date,total_cases)%&gt;% mutate(date = ymd(date, label=TRUE))</p>
-<p>#Mortality Rate Asia</p>
-<p>covid_data_asia_tbl &lt;- covid_data_tbl%&gt;% filter(continent== ‘Asia’) covid_mort_asia_tbl&lt;- covid_data_asia_tbl%&gt;% select(date,total_deaths,total_cases,location)%&gt;% mutate(mortality=total_deaths/total_cases)%&gt;% select(date, mortality, location)</p>
-<p>covid_data_SA_tbl &lt;- covid_data_tbl%&gt;% filter(continent== ‘South America’) covid_mort_SA_tbl&lt;- covid_data_SA_tbl%&gt;% select(date,total_deaths,total_cases,location)%&gt;% mutate(mortality=total_deaths/total_cases)%&gt;% select(date, mortality, location)</p>
-<p>covid_data_NA_tbl &lt;- covid_data_tbl%&gt;% filter(continent== ‘North America’) covid_mort_NA_tbl&lt;- covid_data_NA_tbl%&gt;% select(date,total_deaths,total_cases,location)%&gt;% mutate(mortality=total_deaths/total_cases)%&gt;% select(date, mortality, location)</p>
-<p>covid_data_Africa_tbl &lt;- covid_data_tbl%&gt;% filter(continent== ‘Africa’) covid_mort_Africa_tbl&lt;- covid_data_Africa_tbl%&gt;% select(date,total_deaths,total_cases,location)%&gt;% mutate(mortality=total_deaths/total_cases)%&gt;% select(date, mortality, location)</p>
-<p>covid_data_europe_tbl &lt;-covid_data_tbl%&gt;% filter(continent== ‘Europe’) covid_mort_Europe_tbl &lt;- covid_data_europe_tbl%&gt;% select(date,total_deaths,total_cases,location)%&gt;% mutate(mortality=total_deaths/total_cases)%&gt;% select(date, mortality, location)</p>
-<p>world &lt;- map_data(“world”)%&gt;% rename( location = region)</p>
-<p>combined_data_asia &lt;- merge(x = covid_mort_asia_tbl, y = world, by = “location”, all.x = TRUE, all.y = FALSE)</p>
-<p>combined_data_SA &lt;- merge(x = covid_mort_SA_tbl, y = world, by = “location”, all.x = TRUE, all.y = FALSE)</p>
-<p>combined_data_NA &lt;- merge(x = covid_mort_NA_tbl, y = world, by = “location”, all.x = TRUE, all.y = FALSE)</p>
-<p>combined_data_Africa &lt;- merge(x = covid_mort_Africa_tbl, y = world, by = “location”, all.x = TRUE, all.y = FALSE)</p>
-<p>combined_data_Europe &lt;- merge(x = covid_mort_Europe_tbl, y = world, by = “location”, all.x = TRUE, all.y = FALSE)</p>
-</div>
+<div id="covid-mortality-map" class="section level1">
+<h1>Covid Mortality Map</h1>
+<pre class="r"><code>library(tidyverse) # Main Package - Loads dplyr, purrr, etc.
+library(rvest)     # HTML Hacking &amp; Web Scraping
+library(xopen)     # Quickly opening URLs
+library(jsonlite)  # converts JSON files to R objects
+library(glue)      # concatenate strings
+library(stringi)   # character string/text processing
+library(ggplot2)
+library(maps)
+library(mapdata)
+
+covid_data_tbl &lt;- read_csv(&quot;https://covid.ourworldindata.org/data/owid-covid-data.csv&quot;)
+
+#Mortality Rate
+
+covid_data_selection  &lt;- covid_data_tbl%&gt;%
+  select(location,total_cases,total_deaths)%&gt;%
+  rename(region=location)%&gt;%
+  group_by(region)%&gt;% 
+  mutate(region = case_when(
+
+    region == &quot;United Kingdom&quot; ~ &quot;UK&quot;,
+    region == &quot;United States&quot; ~ &quot;USA&quot;,
+    region == &quot;Democratic Republic of Congo&quot; ~ &quot;Democratic Republic of the Congo&quot;,
+    TRUE ~ region
+
+  )) %&gt;%
+  distinct()
+
+covid_mort_data  &lt;- covid_data_selection%&gt;%
+  
+  summarise(mortality=max(total_deaths, na.rm = TRUE) / max(total_cases, na.rm = TRUE))
+
+world_map &lt;- map_data(&quot;world&quot;) 
+
+
+#Merging Data
+covid_mort_map &lt;- merge(covid_mort_data, world_map, by = &#39;region&#39;)
+
+#Map
+
+ ggplot(covid_mort_map, aes(map_id = region)) +
+    geom_map(aes(fill = mortality), map = world_map) +
+    expand_limits(x = world_map$long, y = world_map$lat) +
+    scale_fill_gradient(low=&#39;blue&#39;, high=&#39;red&#39;)</code></pre>
+<p><img src="04_data_visualization_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 
 
 
-</div>
-</div>
 
 </div>
 
@@ -509,38 +427,7 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
-});
-</script>
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

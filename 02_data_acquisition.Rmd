@@ -18,12 +18,22 @@ Data based on the website "Coingecko"
 library(jsonlite)
 library(data.table)
 
-response = fromJSON("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Ccardano%2Cdogecoin%2Cstellar&vs_currencies=EUR&include_market_cap=true&include_24hr_vol=true")
+responseBTC = fromJSON("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=EUR&include_market_cap=true&include_24hr_vol=true")
+responseADA = fromJSON("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=EUR&include_market_cap=true&include_24hr_vol=true")
+responseETH = fromJSON("https://api.coingecko.com/api/v3/simple/price?ids=cardano&vs_currencies=EUR&include_market_cap=true&include_24hr_vol=true")
+responseDOGE = fromJSON("https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=EUR&include_market_cap=true&include_24hr_vol=true")
 
-Coins <- as.data.frame(response)
-Coins
+BTC <- as.data.frame(responseBTC)
+BTC
 
+ADA <- as.data.frame(responseADA)
+ADA
 
+ETH <- as.data.frame(responseETH)
+ETH
+
+DOGE <- as.data.frame(responseDOGE)
+DOGE
 ```
 # Table Collection of the Prizes of E-Bikes
 based on the Website "Rosebikes"

@@ -1,3 +1,5 @@
+install.
+
 ---
 title: "04 Data Visualization"
 date: "2021-04"
@@ -13,17 +15,8 @@ output:
 ---
 # Challenge #1
 ## Cummulative Confirmed Covid Cases Worldwide
-
 ```{r}
-library(tidyverse) # Main Package - Loads dplyr, purrr, etc.
-library(rvest)     # HTML Hacking & Web Scraping
-library(xopen)     # Quickly opening URLs
-library(jsonlite)  # converts JSON files to R objects
-library(glue)      # concatenate strings
-library(stringi)   # character string/text processing
-library(lubridate)
-library(tictoc)
-
+knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 
 covid_data_tbl <- read_csv("https://covid.ourworldindata.org/data/owid-covid-data.csv")
 
@@ -45,83 +38,51 @@ covid_cases_world_tbl %>%
   )
 ```
 
-# Challenge #2
-unfortunately I wasn't able to finish this exercise. My approach was to set up a Dataframe for each continent with the corresponding mortality rates and the locations (defined by either country or longitude/latitude). That worked out as planned to this point. The problem I had was to cummulate the mortality rate over time per country and to plot this onto the given map. To show you the code up the point that worked out, I've put it below as plain text.
-
-
-## Code for challenge #2
+# Covid Mortality Map
+```{r}
+library(tidyverse) # Main Package - Loads dplyr, purrr, etc.
+library(rvest)     # HTML Hacking & Web Scraping
+library(xopen)     # Quickly opening URLs
+library(jsonlite)  # converts JSON files to R objects
+library(glue)      # concatenate strings
+library(stringi)   # character string/text processing
+library(ggplot2)
+library(maps)
+library(mapdata)
 
 covid_data_tbl <- read_csv("https://covid.ourworldindata.org/data/owid-covid-data.csv")
 
-covid_data_world_tbl  <- covid_data_tbl%>%
-  filter(iso_code== 'OWID_WRL')
+#Mortality Rate
 
-covid_cases_world_tbl<- covid_data_world_tbl%>%
-  select(date,total_cases)%>%
-  mutate(date = ymd(date, label=TRUE))
+covid_data_selection  <- covid_data_tbl%>%
+  select(location,total_cases,total_deaths)%>%
+  rename(region=location)%>%
+  group_by(region)%>% 
+  mutate(region = case_when(
 
-#Mortality Rate Asia
+    region == "United Kingdom" ~ "UK",
+    region == "United States" ~ "USA",
+    region == "Democratic Republic of Congo" ~ "Democratic Republic of the Congo",
+    TRUE ~ region
 
-covid_data_asia_tbl  <- covid_data_tbl%>%
-  filter(continent== 'Asia')
-covid_mort_asia_tbl<- covid_data_asia_tbl%>%
-  select(date,total_deaths,total_cases,location)%>%
-  mutate(mortality=total_deaths/total_cases)%>%
-  select(date, mortality, location)
+  )) %>%
+  distinct()
 
-covid_data_SA_tbl <- covid_data_tbl%>%
-  filter(continent== 'South America')
-covid_mort_SA_tbl<- covid_data_SA_tbl%>%
-  select(date,total_deaths,total_cases,location)%>%
-  mutate(mortality=total_deaths/total_cases)%>%
-  select(date, mortality, location)
+covid_mort_data  <- covid_data_selection%>%
+  
+  summarise(mortality=max(total_deaths, na.rm = TRUE) / max(total_cases, na.rm = TRUE))
 
-covid_data_NA_tbl <- covid_data_tbl%>%
-  filter(continent== 'North America')
-covid_mort_NA_tbl<- covid_data_NA_tbl%>%
-  select(date,total_deaths,total_cases,location)%>%
-  mutate(mortality=total_deaths/total_cases)%>%
-  select(date, mortality, location)
+world_map <- map_data("world") 
 
-covid_data_Africa_tbl <- covid_data_tbl%>%
-  filter(continent== 'Africa')
-covid_mort_Africa_tbl<- covid_data_Africa_tbl%>%
-  select(date,total_deaths,total_cases,location)%>%
-  mutate(mortality=total_deaths/total_cases)%>%
-  select(date, mortality, location)
 
-covid_data_europe_tbl <-covid_data_tbl%>%
-  filter(continent== 'Europe')
-covid_mort_Europe_tbl <- covid_data_europe_tbl%>%
-  select(date,total_deaths,total_cases,location)%>%
-  mutate(mortality=total_deaths/total_cases)%>%
-  select(date, mortality, location)
+#Merging Data
+covid_mort_map <- merge(covid_mort_data, world_map, by = 'region')
 
-world <- map_data("world")%>%
-  rename(
-    location = region) 
+#Map
 
-combined_data_asia <- merge(x = covid_mort_asia_tbl, y = world, 
-                       by    = "location", 
-                       all.x = TRUE, 
-                       all.y = FALSE)
+ ggplot(covid_mort_map, aes(map_id = region)) +
+    geom_map(aes(fill = mortality), map = world_map) +
+    expand_limits(x = world_map$long, y = world_map$lat) +
+    scale_fill_gradient(low='blue', high='red')
 
-combined_data_SA <- merge(x = covid_mort_SA_tbl, y = world, 
-                            by    = "location", 
-                            all.x = TRUE, 
-                            all.y = FALSE)
-
-combined_data_NA <- merge(x = covid_mort_NA_tbl, y = world, 
-                            by    = "location", 
-                            all.x = TRUE, 
-                            all.y = FALSE)
-
-combined_data_Africa <- merge(x = covid_mort_Africa_tbl, y = world, 
-                            by    = "location", 
-                            all.x = TRUE, 
-                            all.y = FALSE)
-
-combined_data_Europe <- merge(x = covid_mort_Europe_tbl, y = world, 
-                            by    = "location", 
-                            all.x = TRUE, 
-                            all.y = FALSE)
+```

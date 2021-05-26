@@ -388,13 +388,37 @@ div.tocify {
 <pre class="r"><code>library(jsonlite)
 library(data.table)
 
-response = fromJSON(&quot;https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Ccardano%2Cdogecoin%2Cstellar&amp;vs_currencies=EUR&amp;include_market_cap=true&amp;include_24hr_vol=true&quot;)
+responseBTC = fromJSON(&quot;https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&amp;vs_currencies=EUR&amp;include_market_cap=true&amp;include_24hr_vol=true&quot;)
+responseADA = fromJSON(&quot;https://api.coingecko.com/api/v3/simple/price?ids=ethereum&amp;vs_currencies=EUR&amp;include_market_cap=true&amp;include_24hr_vol=true&quot;)
+responseETH = fromJSON(&quot;https://api.coingecko.com/api/v3/simple/price?ids=cardano&amp;vs_currencies=EUR&amp;include_market_cap=true&amp;include_24hr_vol=true&quot;)
+responseDOGE = fromJSON(&quot;https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&amp;vs_currencies=EUR&amp;include_market_cap=true&amp;include_24hr_vol=true&quot;)
 
-Coins &lt;- as.data.frame(response)
-Coins</code></pre>
+BTC &lt;- as.data.frame(responseBTC)
+BTC</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["dogecoin.eur"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["dogecoin.eur_market_cap"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["dogecoin.eur_24h_vol"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["ethereum.eur"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["ethereum.eur_market_cap"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["ethereum.eur_24h_vol"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["cardano.eur"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["cardano.eur_market_cap"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["cardano.eur_24h_vol"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["bitcoin.eur"],"name":[10],"type":["int"],"align":["right"]},{"label":["bitcoin.eur_market_cap"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["bitcoin.eur_24h_vol"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["stellar.eur"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["stellar.eur_market_cap"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["stellar.eur_24h_vol"],"name":[15],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.439059","2":"56852308147","3":"36563647898","4":"3225.03","5":"374197884692","6":"53335880280","7":"1.48","8":"47381435648","9":"6294173522","10":"47188","11":"883390857474","12":"56630985748","13":"0.513753","14":"11841400497","15":"1416043049"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["bitcoin.eur"],"name":[1],"type":["int"],"align":["right"]},{"label":["bitcoin.eur_market_cap"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["bitcoin.eur_24h_vol"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"32906","2":"615826912256","3":"39866671225"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>ADA &lt;- as.data.frame(responseADA)
+ADA</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["ethereum.eur"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["ethereum.eur_market_cap"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["ethereum.eur_24h_vol"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"2345.36","2":"272191390326","3":"46181060456"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>ETH &lt;- as.data.frame(responseETH)
+ETH</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["cardano.eur"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["cardano.eur_market_cap"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["cardano.eur_24h_vol"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1.47","2":"47093195434","3":"5306055473"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>DOGE &lt;- as.data.frame(responseDOGE)
+DOGE</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["dogecoin.eur"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["dogecoin.eur_market_cap"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["dogecoin.eur_24h_vol"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.291725","2":"37876255211","3":"3706201504"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -464,7 +488,7 @@ bike_ebike_prizes_tbl &lt;- left_join(bike_names_tbl, bike_prizes_tbl, by = &quo
 bike_ebike_prizes_tbl</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Position"],"name":[1],"type":["int"],"align":["right"]},{"label":["Name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Price"],"name":[3],"type":["chr"],"align":["left"]},{"label":["price_num"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"XTRA WATT EVO ALLROAD HERREN","3":"4.699,00","4":"4.699"},{"1":"2","2":"XTRA WATT EVO ALLROAD DAMEN","3":"4.699,00","4":"4.699"},{"1":"3","2":"XTRA WATT EVO ALLROAD UNISEX","3":"4.699,00","4":"4.699"},{"1":"4","2":"XTRA WATT EVO HERREN","3":"2.999,00","4":"2.999"},{"1":"5","2":"XTRA WATT EVO DAMEN","3":"2.999,00","4":"2.999"},{"1":"6","2":"XTRA WATT EVO UNISEX","3":"4.099,00","4":"4.099"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["Position"],"name":[1],"type":["int"],"align":["right"]},{"label":["Name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Price"],"name":[3],"type":["chr"],"align":["left"]},{"label":["price_num"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"XTRA WATT EVO ALLROAD HERREN","3":"4.699,00","4":"4.699"},{"1":"2","2":"XTRA WATT EVO ALLROAD DAMEN","3":"4.699,00","4":"4.699"},{"1":"3","2":"XTRA WATT EVO ALLROAD UNISEX","3":"4.699,00","4":"4.699"},{"1":"4","2":"XTRA WATT EVO+ ALLROAD UNISEX","3":"4.749,00","4":"4.749"},{"1":"5","2":"XTRA WATT EVO+ ALLROAD HERREN","3":"3.799,00","4":"3.799"},{"1":"6","2":"XTRA WATT EVO HERREN","3":"2.999,00","4":"2.999"},{"1":"7","2":"XTRA WATT EVO DAMEN","3":"2.999,00","4":"2.999"},{"1":"8","2":"XTRA WATT EVO UNISEX","3":"5.899,00","4":"5.899"},{"1":"9","2":"XTRA WATT EVO+ HERREN","3":"3.299,00","4":"3.299"},{"1":"10","2":"XTRA WATT EVO+ UNISEX","3":"4.649,00","4":"4.649"},{"1":"11","2":"XTRA WATT EVO+ KOMFORT","3":"5.999,00","4":"5.999"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>

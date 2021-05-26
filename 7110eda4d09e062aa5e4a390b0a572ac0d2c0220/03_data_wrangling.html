@@ -380,7 +380,8 @@ div.tocify {
 </div>
 
 
-<pre class="r"><code># 1.0 Libraries
+<pre class="r"><code>knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
+# 1.0 Libraries
 # Tidyverse
 library(tidyverse)
 library(vroom)
@@ -506,7 +507,7 @@ combined_data_c1 &lt;- merge(x = patent_assignee_data, y = assignee_data,
                        all.x = TRUE, 
                        all.y = FALSE)
 toc()</code></pre>
-<pre><code>## 0.12 sec elapsed</code></pre>
+<pre><code>## 0.14 sec elapsed</code></pre>
 <pre class="r"><code>combined_data_c1 %&gt;% glimpse()</code></pre>
 <pre><code>## Rows: 315,911
 ## Columns: 4
@@ -537,7 +538,7 @@ combined_data_c2 &lt;- merge(x = combined_data_c1, y = patent_data,
                           all.x = TRUE, 
                           all.y = FALSE)
 toc()</code></pre>
-<pre><code>## 0.76 sec elapsed</code></pre>
+<pre><code>## 0.92 sec elapsed</code></pre>
 <pre class="r"><code>combined_data_c2 %&gt;% glimpse()</code></pre>
 <pre><code>## Rows: 315,911
 ## Columns: 6
@@ -572,7 +573,7 @@ combined_data_c1[!is.na(organization), .N, by = organization]</code></pre>
   </script>
 </div>
 <pre class="r"><code>toc()</code></pre>
-<pre><code>## 0.31 sec elapsed</code></pre>
+<pre><code>## 0.34 sec elapsed</code></pre>
 <div id="how-many-patents-per-organization" class="section level1" number="1">
 <h1 number="1"><span class="header-section-number">1</span> How many Patents per organization</h1>
 <pre class="r"><code>tic()
@@ -587,11 +588,53 @@ combined_data_c1 %&gt;%
   </script>
 </div>
 <pre class="r"><code>toc()</code></pre>
-<pre><code>## 1.27 sec elapsed</code></pre>
+<pre><code>## 1.33 sec elapsed</code></pre>
 </div>
-<div id="challenge-2-3" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> Challenge 2 &amp; 3</h1>
-<p>I wasn’t able to finish the following challenges. My code to filter the data by August 2014 did not work properly. Unfortunately I also wasn’t able to log into Mattermost to post my questions regarding my code prior to the weekend. I moved into a different appartment last weekend and my Internet was not working properly until thursday. So I’m really hoping that the scope of presented solutions for the tasks are sufficient to pass the course.</p>
+<div id="how-many-patents-per-organization-in-august-2014" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> How many Patents per organization in August 2014</h1>
+<pre class="r"><code># 5.2 How many Patents per organization in August 2014 ----
+
+tic()
+combined_data_c2 %&gt;%
+  filter(!is.na(date), lubridate::month(date) == 08) %&gt;%
+  count(organization) %&gt;%
+  arrange(desc(n)) %&gt;%
+  slice_head(n=10)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["organization"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"International Business Machines Corporation","2":"718"},{"1":"Samsung Electronics Co., Ltd.","2":"524"},{"1":"Canon Kabushiki Kaisha","2":"361"},{"1":"Microsoft Corporation","2":"337"},{"1":"Sony Corporation","2":"269"},{"1":"Google Inc.","2":"240"},{"1":"QUALCOMM Incorporated","2":"223"},{"1":"Apple Inc.","2":"222"},{"1":"Kabushiki Kaisha Toshiba","2":"213"},{"1":"LG Electronics Inc.","2":"211"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>toc()</code></pre>
+<pre><code>## 0.3 sec elapsed</code></pre>
+</div>
+<div id="innovation-in-technology" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Innovation in Technology</h1>
+<div id="table-data" class="section level2" number="3.1">
+<h2 number="3.1"><span class="header-section-number">3.1</span> Table Data</h2>
+<pre class="r"><code># 5.3 Inno in Tech ----
+tic()
+combined_data_c3 %&gt;%
+  filter(!is.na(mainclass_id)) %&gt;%
+  count(mainclass_id) %&gt;%
+  arrange(desc(n)) %&gt;%
+  slice_head(n=10)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["mainclass_id"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"257","2":"41500"},{"1":"455","2":"29419"},{"1":"370","2":"25628"},{"1":"438","2":"20372"},{"1":"709","2":"18345"},{"1":"435","2":"16930"},{"1":"514","2":"14927"},{"1":"345","2":"13744"},{"1":"348","2":"12281"},{"1":"424","2":"11752"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>toc()</code></pre>
+<pre><code>## 0.07 sec elapsed</code></pre>
+</div>
+<div id="the-top-5-tech-sectors-are" class="section level2" number="3.2">
+<h2 number="3.2"><span class="header-section-number">3.2</span> The top 5 Tech Sectors are:</h2>
+<p>“Active solid-state devices” with 41500 patents</p>
+<p>“Telecommunications” with 29419 patents</p>
+<p>“Multiplex Communications” with 25628 patents</p>
+<p>“Semiconductor devices” with 20372 patents</p>
+<p>“Electrical computers” with 18345 patents</p>
+</div>
 </div>
 
 

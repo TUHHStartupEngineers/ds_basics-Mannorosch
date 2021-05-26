@@ -182,7 +182,7 @@ toc()
 
 tic()
 combined_data_c2 %>%
-  filter(!is.na(date), date == "2014-08") %>%
+  filter(!is.na(date), lubridate::month(date) == 08) %>%
   count(organization) %>%
   arrange(desc(n)) %>%
   slice_head(n=10)
@@ -191,13 +191,10 @@ toc()
 # 5.3 Innovation in Tech ----
 
 tic()
-combined_data_c3[!is.na(organization), .N, by = organization]
-toc()
-
-tic()
 combined_data_c3 %>%
-  filter(!is.na(organization)) %>%
+  filter(!is.na(mainclass_id)) %>%
   count(mainclass_id) %>%
   arrange(desc(n)) %>%
-  slice_head(n=10)
+  slice_head(n=5)
 toc()
+
